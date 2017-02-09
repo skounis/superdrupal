@@ -1,0 +1,7 @@
+superdrupal.content:
+  path: '/hello'
+  defaults:
+    _controller: '\Drupal\superdrupal\Controller\SuperDrupalController::content'
+    _title: 'Hello Ford Escort'
+  requirements:
+    _permission: 'access content'
