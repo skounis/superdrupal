@@ -3,6 +3,7 @@ Develop Drupal modules and themes with Docker. A skeleton workspace.
 
 ### Docker
 Based on https://hub.docker.com/r/wadmiraal/drupal/
+> Please note that Docker should be already installed in your box. https://www.docker.com/products/docker
 
 Start the container
 1. Web and Shell: `docker run -d -p 8080:80 -p 8022:22 -t wadmiraal/drupal:8`
