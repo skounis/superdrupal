@@ -1,0 +1,6 @@
+superdrupal.admin:
+  title: 'SuperDrupal module settings'
+  description: 'example of how to make an admin settings page link'
+  parent: system.admin_config_development
+  route_name: superdrupal.content
+  weight: 100
