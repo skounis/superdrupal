@@ -1,5 +1,5 @@
 superdrupal.content:
-  path: '/hello'
+  path: '/superdrupal/hello'
   defaults:
     _controller: '\Drupal\superdrupal\Controller\SuperDrupalController::content'
     _title: 'Hello Ford Escort'
