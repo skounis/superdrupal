@@ -60,4 +60,14 @@ class SuperDrupalBlock extends BlockBase implements BlockPluginInterface {
     $this->configuration['name'] = $form_state->getValue('superdrupal_block');
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration() {
+    $default_config = \Drupal::config('superdrupal.settings');
+    return array(
+      'name' => $default_config->get('superdrupal.name'),
+    );
+  }
+
 }
