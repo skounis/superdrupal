@@ -1,0 +1,9 @@
+superdrupal:
+  version: 1.x
+  css:
+    theme:
+      css/superdrupal.css: {}
+  js:
+    js/superdrupal.js: {}
+  dependencies:
+    - core/jquery
