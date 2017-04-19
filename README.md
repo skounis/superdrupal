@@ -8,7 +8,7 @@ Based on https://hub.docker.com/r/wadmiraal/drupal/
 Start the container:
 
 1. Web and Shell: `docker run -d -p 8080:80 -p 8022:22 -t wadmiraal/drupal:8`
-2. Write code locally: `docker run -d -p 8080:80  -p 8022:22 -v `pwd`/modules:/var/www/modules/custom -t wadmiraal/drupal:8`
+2. Write code locally: ``docker run -d -p 8080:80  -p 8022:22 -v `pwd`/modules:/var/www/modules/custom -t wadmiraal/drupal:8``
 
 Manage the containers
 
