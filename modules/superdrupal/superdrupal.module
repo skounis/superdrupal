@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * SuperDrupal module file.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function superdrupal_theme() {
+  $themes['superdrupal_base'] = array(
+    'variables' => array('data' => array()),
+    'template' => 'superdrupal_base',
+  );
+
+  return $themes;
+}

@@ -2,15 +2,18 @@
 
 namespace Drupal\superdrupal\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
+/**
+ * Class SuperDrupalController.
+ *
+ * @package Drupal\superdrupal\Controller
+ */
+class SuperDrupalController extends SuperDrupalControllerBase {
 
-class SuperDrupalController extends ControllerBase {
-
-  public function content() {
-    return array(
-      '#type' => 'markup',
-      '#markup' => $this->t('So Long, and Thanks for All the Fish!'),
-    );
+  /**
+   * {@inheritdoc}
+   */
+  public function getTemplateData() {
+    return $this->t('So Long, and Thanks for All the Fish');
   }
 
 }
