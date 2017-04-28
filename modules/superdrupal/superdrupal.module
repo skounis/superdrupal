@@ -14,9 +14,14 @@ use Drupal\superdrupal\Form\ProfileForm;
  * Implements hook_theme().
  */
 function superdrupal_theme() {
+  $themes['superdrupal_base'] = array(
+    'variables' => array('data' => array()),
+    'template' => 'superdrupal_base',
+  );
+
   $themes['superdrupal_profile'] = array(
     'variables' => array('profile' => array()),
-    'template' => 'superdrupal-profile',
+    'template' => 'superdrupal_profile',
   );
 
   return $themes;

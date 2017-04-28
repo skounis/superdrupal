@@ -3,29 +3,43 @@
 namespace Drupal\superdrupal\Controller;
 
 /**
- * Profile controller class.
- */
-use Drupal\Core\Controller\ControllerBase;
-
-/**
  * Class ProfileController.
  *
  * @package Drupal\superdrupal\Controller
  */
-class ProfileController extends ControllerBase
+class ProfileController extends SuperDrupalControllerBase
 {
-
   /**
-   * Display profile page.
+   * Return theme array.
    *
    * @return array
-   *   Return render array.
+   *   Return renderable page array.
    */
-  public function content() {
+  public function getThemeArray() {
     return array(
-      '#theme' => 'superdrupal_profile',
-      '#profile' => _superdrupal_get_user_fields_view(),
+      '#theme' => 'superdrupal_' . $this->getThemeName(),
+      '#profile' => $this->getTemplateData(),
     );
   }
 
+  /**
+   * Return template theme data.
+   *
+   * @return mixed
+   *   Can be single variable, array of collection.
+   */
+  public function getTemplateData()
+  {
+    return _superdrupal_get_user_fields_view();
+  }
+
+  /**
+   * Return theme name.
+   *
+   * @return string
+   *   Theme name.
+   */
+  public function getThemeName() {
+    return 'profile';
+  }
 }
