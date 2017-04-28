@@ -1,0 +1,98 @@
+<?php
+
+/**
+ * @file
+ * SuperDrupal module file.
+ */
+
+use Drupal\user\Entity\User;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\superdrupal\Form\ProfileForm;
+
+/**
+ * Implements hook_theme().
+ */
+function superdrupal_theme() {
+  $themes['superdrupal_profile'] = array(
+    'variables' => array('profile' => array()),
+    'template' => 'superdrupal-profile',
+  );
+
+  return $themes;
+}
+
+/**
+ * Hook_entity_base_field_info().
+ */
+function superdrupal_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = array();
+
+  if ($entity_type->id() == 'user') {
+    $fields['full_name'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Full name'))
+      ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['role'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Role'))
+      ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['birth_date'] = BaseFieldDefinition::create('datetime')
+      ->setLabel(t('Date of Birth'))
+      ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('datetime_type', 'date');
+
+    $fields['sex'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Gender'))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['note'] = BaseFieldDefinition::create('text')
+      ->setLabel(t('Notes'))
+      ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  return $fields;
+}
+
+/**
+ * Generate markup array of user fields.
+ *
+ * @return array
+ *   Return user field values for render array.
+ */
+function _superdrupal_get_user_fields_view() {
+  $fields = array();
+  $user = User::load(Drupal::currentUser()->id());
+
+  foreach (_superdrupal_get_user_fields() as $field) {
+    if ($field == 'sex' && ($value = $user->get($field)->getString())) {
+      $user->set($field, ProfileForm::genderArrayValues()[$value]);
+    }
+    $fields[$field] = render($user->get($field)->view());
+  }
+
+  return $fields;
+}
+
+/**
+ * Return custom user field names.
+ *
+ * @return array
+ *   Return custom user field names.
+ */
+function _superdrupal_get_user_fields() {
+  return array('full_name', 'role', 'birth_date', 'sex', 'note');
+}

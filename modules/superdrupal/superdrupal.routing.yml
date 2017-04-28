@@ -5,3 +5,20 @@ superdrupal.content:
     _title: 'Hello Ford Escort'
   requirements:
     _permission: 'access content'
+
+superdrupal.profile:
+  path: '/superdrupal/profile'
+  defaults:
+    _controller: '\Drupal\superdrupal\Controller\ProfileController::content'
+    _title: 'User profile'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+superdrupal.profile.edit:
+  path: '/superdrupal/profile/edit'
+  defaults:
+    _form: '\Drupal\superdrupal\Form\ProfileForm'
+    _title: 'Edit profile'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
