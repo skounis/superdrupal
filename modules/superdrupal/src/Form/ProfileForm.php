@@ -43,33 +43,37 @@ class ProfileForm extends FormBase
     $form['full_name'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Full name'),
-      '#default_value' => $entity->get('full_name')->getString(),
+      '#default_value' => $entity->get('field_full_name')->getString(),
       '#required' => TRUE,
     );
 
     $form['role'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Role'),
-      '#default_value' => $entity->get('role')->getString(),
+      '#default_value' => $entity->get('field_role')->getString(),
     );
 
     $form['birth_date'] = array(
       '#type' => 'date',
       '#title' => $this->t('Date of Birth'),
-      '#default_value' => $entity->get('birth_date')->getString(),
+      '#default_value' => $entity->get('field_birth_date')->getString(),
     );
+
+    $sexFieldValues = options_allowed_values($entity->get('field_sex')
+      ->getFieldDefinition()
+      ->getFieldStorageDefinition());
 
     $form['sex'] = array(
       '#type' => 'select',
       '#title' => $this->t('Gender'),
-      '#options' => static::genderArrayValues(),
-      '#default_value' => $entity->get('sex')->getString(),
+      '#default_value' => $entity->get('field_sex')->getString(),
+      '#options' => array_merge(array('' => t('Choose your gender')), $sexFieldValues),
     );
 
-    $form['note'] = array(
+    $form['notes'] = array(
       '#type' => 'textarea',
       '#title' => $this->t('Notes'),
-      '#default_value' => $entity->get('note')->getString(),
+      '#default_value' => $entity->get('field_notes')->getString(),
     );
 
     $form['submit'] = array(
@@ -94,24 +98,10 @@ class ProfileForm extends FormBase
 
     foreach (_superdrupal_get_user_fields() as $field) {
       if (isset($values[$field])) {
-        $entity->set($field, $values[$field]);
+        $entity->set('field_' . $field, $values[$field]);
       }
     }
 
     $entity->save();
   }
-
-  /**
-   * Get values of gender field.
-   *
-   * @return array
-   *   Return array of values of gender field.
-   */
-  public static function genderArrayValues() {
-    return array(
-      static::GENDER_MALE => t('Male'),
-      static::GENDER_FEMALE => t('Female'),
-    );
-  }
-
 }
