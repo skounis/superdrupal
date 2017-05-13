@@ -4,3 +4,9 @@ superdrupal.admin:
   parent: system.admin_config_development
   route_name: superdrupal.content
   weight: 100
+
+super_profile.admin.structure.settings:
+  title: Super profile settings
+  description: 'Configure Super profile'
+  route_name: super_profile.settings
+  parent: system.admin_structure

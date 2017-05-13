@@ -2,6 +2,10 @@
 
 namespace Drupal\superdrupal\Controller;
 
+use Drupal\superdrupal\Entity\SuperProfile;
+use Drupal\user\Entity\User;
+use Drupal;
+
 /**
  * Class ProfileController.
  *
@@ -16,30 +20,17 @@ class ProfileController extends SuperDrupalControllerBase
    *   Return renderable page array.
    */
   public function getThemeArray() {
-    return array(
-      '#theme' => 'superdrupal_' . $this->getThemeName(),
-      '#profile' => $this->getTemplateData(),
-    );
-  }
+    /** @var User $user */
+    $profile = SuperProfile::getByUid(Drupal::currentUser()->id());
+    if (!$profile) {
+      $profile = SuperProfile::create([
+        'user_id' => Drupal::currentUser()->id(),
+      ]);
+    }
+    $render = Drupal::service('entity_type.manager')->getViewBuilder($profile->getEntityTypeId())->view($profile);
 
-  /**
-   * Return template theme data.
-   *
-   * @return mixed
-   *   Can be single variable, array of collection.
-   */
-  public function getTemplateData()
-  {
-    return _superdrupal_get_user_fields_view();
-  }
+    $render['#theme'] = 'superdrupal_profile';
 
-  /**
-   * Return theme name.
-   *
-   * @return string
-   *   Theme name.
-   */
-  public function getThemeName() {
-    return 'profile';
+    return $render;
   }
 }

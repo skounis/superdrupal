@@ -17,8 +17,15 @@ superdrupal.profile:
 superdrupal.profile.edit:
   path: '/superdrupal/profile/edit'
   defaults:
-    _form: '\Drupal\superdrupal\Form\ProfileForm'
+    _entity_form: super_profile.default
     _title: 'Edit profile'
   requirements:
     _user_is_logged_in: 'TRUE'
 
+super_profile.settings:
+  path: 'admin/structure/super_profile/settings'
+  defaults:
+    _form: '\Drupal\superdrupal\Form\SuperProfileSettingsForm'
+    _title: 'Super Profile Settings'
+  requirements:
+    _permission: 'administer'
