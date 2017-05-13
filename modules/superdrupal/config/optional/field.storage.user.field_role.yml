@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+  enforced:
+    module:
+      - superdrupal
+id: user.field_role
+field_name: field_role
+entity_type: user
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

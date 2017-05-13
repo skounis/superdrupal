@@ -13,7 +13,6 @@ use Drupal\Core\Render\Element;
 function superdrupal_theme() {
   $themes['superdrupal_base'] = array(
     'variables' => array('data' => array()),
-    'template' => 'superdrupal_base',
   );
 
   $themes['superdrupal_profile'] = array(
@@ -33,3 +32,4 @@ function template_preprocess_superdrupal_profile(&$variables) {
     $variables['content'][$key] = $variables['elements'][$key];
   }
 }
+
