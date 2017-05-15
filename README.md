@@ -19,3 +19,18 @@ Manage the containers
 Drupal and Shell access
 * http://localhost:8080 (`admin`/`admin`)
 * `ssh root@localhost -p8022` with password `root`
+
+
+Enable Debug
+Add the following lines at the end of the `setting.php`
+
+```
+/*
+ * Enable debug
+ */
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+
+$config['system.logging']['error_level'] = 'verbose';
+```
