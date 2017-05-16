@@ -50,6 +50,8 @@ abstract class SuperDrupalControllerBase extends ControllerBase {
    * @return mixed
    *   Can be single variable, array of collection.
    */
-  abstract public function getTemplateData();
+  public function getTemplateData() {
+    return null;
+  }
 
 }
