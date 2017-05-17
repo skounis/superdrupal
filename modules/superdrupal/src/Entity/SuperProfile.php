@@ -173,7 +173,10 @@ class SuperProfile extends ContentEntityBase {
       ->setSetting('datetime_type', 'date')
       ->setDisplayOptions('form', array(
         'weight' => 4,
-      ));
+      ))
+      ->setDisplayOptions('view', array(
+        'weight' => 4,
+      ));;
 
     $fields['sex'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Sex'))
@@ -210,6 +213,7 @@ class SuperProfile extends ContentEntityBase {
       ))->setDisplayOptions('view', array(
         'label' => 'above',
         'type' => 'string',
+        'weight' => 5,
       ));
 
     $fields['langcode'] = BaseFieldDefinition::create('language')
@@ -225,3 +229,4 @@ class SuperProfile extends ContentEntityBase {
   }
 
 }
+
