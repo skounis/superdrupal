@@ -30,6 +30,7 @@ class ProfileController extends SuperDrupalControllerBase
     $render = Drupal::service('entity_type.manager')->getViewBuilder($profile->getEntityTypeId())->view($profile);
 
     $render['#theme'] = 'superdrupal_profile';
+    $render['#cache']['max-age'] = 0;
 
     return $render;
   }
