@@ -1,0 +1,10 @@
+{#
+/**
+ * @file
+ * Superdrupal module SuperdrupalReach template.
+ */
+ #}
+
+{% for item in data %}
+  {{ 'Hello, @name!'|t({ '@name': item }) }}
+{% endfor %}

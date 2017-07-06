@@ -19,6 +19,13 @@ function superdrupal_theme() {
     'render element' => 'elements',
   );
 
+  $themes['superdrupalreach'] = [
+    'template' => 'superdrupalreach',
+    'variables' => [
+      'data' => NULL,
+    ],
+  ];
+
   return $themes;
 }
 
