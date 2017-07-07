@@ -5,6 +5,7 @@
  * Contains superdrupal.module.
  */
 
+use Drupal\block\Entity\Block;
 use Drupal\Core\Render\Element;
 
 /**
@@ -18,6 +19,14 @@ function superdrupal_theme() {
   $themes['superdrupal_profile'] = array(
     'render element' => 'elements',
   );
+
+  // Theme for superdrupalinject block.
+  $themes['superdrupalinject'] = [
+    'template' => 'superdrupalinject',
+    'variables' => [
+      'data' => NULL,
+    ],
+  ];
 
   return $themes;
 }
@@ -33,3 +42,42 @@ function template_preprocess_superdrupal_profile(&$variables) {
   }
 }
 
+/**
+ * Implements hook_library_info_build().
+ */
+function superdrupal_library_info_alter(&$libraries, $extension) {
+  if ($extension == 'superdrupal' && isset($libraries['superdrupalinject'])) {
+    $example_block = \Drupal::entityTypeManager()->getStorage('block')->loadByProperties(['plugin' => 'superdrupalinject']);
+    if (!empty($example_block)) {
+      $example_block = Block::load(@reset(array_keys($example_block)));
+      $block = $example_block->get('settings');
+    }
+    $libraries['superdrupalinject']['js'] = [
+      $block['js'] => [],
+    ];
+  }
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function superdrupal_page_attachments(array &$attachments) {
+  $example_block = \Drupal::entityTypeManager()->getStorage('block')->loadByProperties(['plugin' => 'superdrupalinject']);
+  if (!empty($example_block)) {
+    $example_block = Block::load(@reset(array_keys($example_block)));
+    $block = $example_block->get('settings');
+  }
+  $attachments['#attached']['library'][] = 'superdrupal/superdrupalinject';
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#type' => 'html_tag',
+      '#tag' => 'link',
+      '#attributes' => [
+        'href' => $block['css'],
+        'rel' => 'stylesheet',
+        'data-id' => 'superdrupalinject-css',
+      ],
+    ],
+    'superdrupalinject-css',
+  ];
+}
