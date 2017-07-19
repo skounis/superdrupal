@@ -7,3 +7,12 @@ superdrupal:
     js/superdrupal.js: {}
   dependencies:
     - core/jquery
+
+superdrupalinject:
+  version: 1.x
+  css:
+    theme: {}
+  js: {}
+  dependencies:
+    - core/jquery
+
