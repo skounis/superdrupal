@@ -29,3 +29,11 @@ super_profile.settings:
     _title: 'Super Profile Settings'
   requirements:
     _permission: 'administer'
+
+superdrupalinject.settings:
+  path: 'admin/config/superdrupalinject'
+  defaults:
+    _form: '\Drupal\superdrupal\Form\SuperDrupalInjectSettingsForm'
+    _title: 'SuperDrupalInject Settings'
+  requirements:
+    _permission: 'administer site configuration'
